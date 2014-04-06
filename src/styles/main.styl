@@ -2,11 +2,12 @@
 
 // variables!
 
-slide_width = 640px
-slide_height = 480px
-slide_background = #eaeaea
+slide_width = 1400px
+slide_height = 700px
+page_background = azure
+slide_background = rgba(255, 255, 255, 0.4)
 
-slide_transition_length = .6s
+slide_transition_length = .4s
 slide_transition_easing = ease
 slide_transition_rotate_y = 90deg
 // Safari bugs out on 3d transform-origins, so we have to fake it
@@ -15,6 +16,8 @@ slide_transition_nudge_x = -100px
 bullet_transition_length = .3s
 bullet_transition_easing = ease
 bullet_transition_translate_x = 16px
+
+text_color = #404040
 
 // base
 
@@ -36,6 +39,7 @@ bullet_transition_translate_x = 16px
 article
   transition: background slide_transition_length slide_transition_easing
   display: none
+  background: page_background
   &.bespoke-parent
     display: block
     position: absolute
@@ -50,12 +54,6 @@ article
     perspective: 600px
 
 .bespoke-slide
-  transition:
-    transform slide_transition_length slide_transition_easing,
-    opacity slide_transition_length slide_transition_easing,
-    background slide_transition_length slide_transition_easing
-  transform-origin: 50% 50% 0
-  backface-visibility: hidden
   display: flex
   flex-direction: column
   justify-content: center
@@ -93,8 +91,19 @@ article
   @media print
     opacity 1
 
+.bespoke-slide
+  for i in (1..10)
+    > *:nth-child({i})
+      transition: opacity slide_transition_length slide_transition_easing slide_transition_length * (i - 1)
+
 .bespoke-active
   opacity: 1
+  > *
+    opacity: 1
+
+.bespoke-inactive
+  > *
+    opacity: 0
 
 // bespoke-scale styles
 
@@ -141,28 +150,64 @@ pre
   border-radius: 8px
 
 // content styles
+.byline, .row
+  width: 100%
+  margin: 20px 0
+  display: -webkit-box
+  box-align: center
+.byline
+  font-size: 1.9em
+  color: text_color
+  &::before, &::after
+    content: ''
+    display: block
+    box-flex: 1
+    height: 0
+    padding-top: 1px
+    border-bottom: 1px dotted text_color
+  > *
+    margin-right: 20px
+    &:first-child
+      margin-left: 20px
+
+.classy
+  font-family: baskerville, Georgia, serif
+  letter-spacing: 1px
 
 body
-  font-family: helvetica, arial, sans-serif
+  font-family: source_sans_pro, helvetica, arial, sans-serif
   font-size: 18px
-  color: #404040
+  color: text_color
+
+img
+  max-width: 100%
+  max-height: 100%
 
 h1
-  font-size: 72px
-  line-height: 82px
+  font-size: 5em
+  font-weight: 200
+  line-height: 1.1em
   letter-spacing: -2px
-  margin-bottom: 16px
+  margin-top: 0.25em
+  margin-bottom: 0.25em
 
 h2
-  font-size: 42px
+  font-size: 4em
+  font-weight: 300
   letter-spacing: -1px
-  margin-bottom: 8px
+  margin-top: 0.1em
+  margin-bottom: 0.1em
 
 h3
-  font-size: 24px
+  font-size: 3em
   font-weight: normal
-  margin-bottom: 24px
+  margin-bottom: 0.25em
   color: #606060
+
+h4
+  font-size: 2.5em
+  font-weight: 600
+  margin-bottom: 0.25em
 
 hr
   visibility: hidden
@@ -175,9 +220,13 @@ li
   margin-bottom: 12px
 
 p
-  margin: 0 100px 12px
-  line-height: 22px
+  font-size: 1.5em
+  margin: 0.3em 100px 
+  line-height: 1.25em
 
 a
   color: #0089f3
   text-decoration: none
+
+img
+  max-width: 100%
