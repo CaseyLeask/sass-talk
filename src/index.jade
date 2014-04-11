@@ -16,6 +16,19 @@ html
     article
 
       section
+
+      section
+        .byline
+          .classy This talk is called
+        h1 Responsive Images
+        .byline
+          .classy by this guy
+        img(src="images/profile.jpeg", style="border-radius:50%;")
+        .byline
+          a(href="http://twitter.com/CaseyLeask") @
+            span.classy CaseyLeask
+
+      section
         h1 Structuring Sass for reuse and composability
 
       section
@@ -54,11 +67,12 @@ html
       section
         img(src="images/12.png")
 
-      section
-        img(src="images/13.png")
-
-      section
-        img(src="images/14.png")
+      section(data-bespoke-state='emphatic')
+        img(src="images/profile.jpeg", style="border-radius:50%;")
+        hr
+        h1 Thanks!
+        h4
+          a(href="twitter.com/caseyleask") @CaseyLeask
 
     // build:js scripts/scripts.js
     script(src='bower_components/bespoke.js/dist/bespoke.min.js')
